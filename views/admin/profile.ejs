@@ -1,0 +1,27 @@
+<%-include('../includes/adminbar.ejs')%>
+        <main>
+
+            <div class="page-header">
+                <h1>Admin Profile</h1>
+            </div>
+            <div class="page-content">
+                <br><br>
+                <h2>Admin Name:Vivek</h2>
+                <br><br>
+                <h2>Admin Email:vivek@gmail.com</h2>
+                <br><br>
+                <%let cnt=0%>
+                <%for(let user of users){%>
+                    <%cnt=cnt+1%>
+                <%}%>
+                <h2>No of Users:<%=cnt%></h2>
+            </div>
+
+        </main>
+    </div>
+
+    
+
+</body>
+
+</html>

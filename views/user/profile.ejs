@@ -1,0 +1,28 @@
+<%-include('../includes/sidebar.ejs',{user:user}) %>
+        <main>
+
+            <div class="page-header">
+                <h1>User Profile</h1>
+            </div>
+            <div class="page-content">
+                <br><br>
+                <h2>User Email:<%=user%></h2>
+                <br><br>
+                <%let cnt=0%>
+                <%for(let device of devices){%>
+                    <%let str=device.userId.toString()%>
+                    <%if(str===id){%>
+                <%cnt=cnt+1%>
+                <%}%>
+                <%}%>
+                <h2>No of Devices:<%=cnt%></h2>
+            </div>
+
+        </main>
+    </div>
+
+    
+
+</body>
+
+</html>

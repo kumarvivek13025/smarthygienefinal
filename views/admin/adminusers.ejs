@@ -1,0 +1,36 @@
+<%-include('../includes/adminbar.ejs')%>
+        <main>
+
+            <div class="page-header">
+                <h1>Users</h1>
+            </div>
+
+            <div>
+              <!-- devices   -->
+              <main>
+                <% if (users.length > 0) { %>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>User</th>
+                                <th>User Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let cnt = 1 %>
+                            <% for (let user of users) { %>
+                                <tr>
+                                    <td><%= cnt %></td>
+                                    <td><%= user.email %></td>
+                                </tr>
+                                <% cnt++ %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <h1>No Users Found</h1>
+                <% } %>
+            </main>
+        </div>
+    </main>
+</div>            

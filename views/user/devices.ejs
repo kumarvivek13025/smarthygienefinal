@@ -1,0 +1,81 @@
+<%-include('../includes/sidebar.ejs',{user:user}) %>
+        <main>
+
+            <div class="page-header">
+                <h1>Devices</h1>
+            </div>
+
+            <div class="page-content">
+                <nav class="topnav">
+                        <a class="<%=path==='/devices'?'active' : ' ' %>" href="/devices" active="">Devices</a>
+                        <a class="<%=path==='/add-devices'?'active' : ' ' %>" href="/add-devices">Add Devices</a> 
+                </nav>
+                
+            </div>
+            <div>
+              <!-- devices   -->
+              <main>
+                <% if (devices && devices.length > 0) { %>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Device Name</th>
+                                <th>Location</th>
+                                <th>Device Status</th>
+                                <th>Dashboard</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let index = 0 %>
+                            <% devices.forEach(device => { %>
+                                <% let str = device.userId.toString() %>
+                                <% if (id == str) { %>
+                                    <% index = index + 1 %>
+                                    <tr>
+                                        <td><%= index %></td>
+                                        <td><%= device.deviceName %></td>
+                                        <td><%= device.location %></td>
+                                        <td>Online</td>
+                                        <td><a id="addthis" href="/devices/<%=device._id%>">Dashboard</a></td>
+
+                                    </tr>
+                                <% } %>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <h1>No Devices Found</h1>
+                <% } %>
+            </main>
+            
+                <!-- <% if (devices.length > 0) { %>
+                    <div class="grid">
+                        <% let cnt=1 %>
+                        <% for (let device of devices) { %>
+                            <%let str=device.userId.toString()%>
+                            <%if(id==str){%>
+                                <div class="device-info">
+                                    <p>Device No: <%=cnt%></p>
+                                    <p>Device Name: <%=device.deviceName%></p>
+                                    <p>Device Location: <%=device.location%></p>
+                                    <p>Device Status: Online</p>
+                                    <a href="/devices/<%=device._id%>">Dashboard</a>
+                                    <%cnt=cnt+1%>
+                                </div>
+                            <%}%>
+                        <%}%>
+                    </div>
+                    <% } else { %>
+                        <h1>No Devices Found</h1>
+                        <% } %>
+            </main>
+            </div>
+        </main>
+    </div>
+
+    
+
+</body>
+
+</html> -->

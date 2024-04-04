@@ -1,0 +1,179 @@
+<%-include('../includes/sidebar.ejs',{user:user}) %>
+
+<main>
+    
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <h2>Device Name:<%=device.deviceName%></h2>
+                <h2>Loaction:<%=device.location%></h2>
+                
+            </div>
+
+            <div class="page-content">
+
+                <div class="analytics">
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>32°C</h2>
+                            <Small>
+                                <li>Humidity: 89% </li>
+                                <li>Wind: 8 km/h</li>
+
+                            </Small>
+                            <span class="las la-thermometer"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>Real time Temperature & Humidity updates</small>
+                            <div class="card-indicator">
+                                <div class="indicator one" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2> 8/day</h2>
+                            <span class="las la-hands"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small> Hand washing compliance rate by day/hr</small>
+                            <div class="card-indicator">
+                                <div class="indicator two" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>Levels</h2>
+                            <span class="las la-eye"></span>
+                            <span class="las la-garbage"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small> Levels of ammonia, sulphur dioxide, carbon monoxide, etc</small>
+                            <div class="card-indicator">
+                                <div class="indicator three" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>Alert!</h2>
+                            <span class="las la-envelope"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>New notification received: check your email
+                            </small>
+                            <div class="card-indicator">
+                                <div class="indicator four" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Main content container -->
+
+    <div class="graph-content">
+        <div class="cont-grid">
+
+            <div class="cardgraph">
+                <h1>Ammonia</h1>
+                <!-- Container for the chart -->
+                <div class="chart-container">
+                    <canvas id="chart1" width="700" height="400"></canvas>
+                </div>
+            </div>
+
+            <div class="cardgraph">
+                <h1>Hydrogen Sulphide</h1>
+                <!-- Container for the chart -->
+                <div class="chart-container">
+                    <canvas id="chart2" width="700" height="400"></canvas>
+                </div>
+            </div>
+
+            <div class="cardgraph">
+                <h1>Temperature</h1>
+                <!-- Container for the chart -->
+                <div class="chart-container">
+                    <canvas id="chart3" width="700" height="400"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartsConfig = [
+                {
+                    canvasId: 'chart1',
+                    label: 'Ammonia Levels',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                },
+                {
+                    canvasId: 'chart2',
+                    label: 'Hydrogen Sulphide Levels',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                },
+                {
+                    canvasId: 'chart3',
+                    label: 'Temperature',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                }
+            ];
+        
+            const charts = chartsConfig.map(config => {
+                const ctx = document.getElementById(config.canvasId).getContext('2d');
+                return new Chart(ctx, {
+                    type: 'line', // This example uses line charts
+                    data: {
+                        labels: Array.from({length: 10}, (_, i) => i), // X-axis labels (0-9 for simplicity)
+                        datasets: [{
+                            label: config.label,
+                            data: getRandomData(10, 100), // Initial random data
+                            backgroundColor: config.backgroundColor,
+                            borderColor: config.borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        
+            // Function to generate random data
+            function getRandomData(length, max) {
+                return Array.from({ length }, () => Math.floor(Math.random() * max));
+            }
+        
+            // Update charts with new random data every 5 seconds
+            setInterval(() => {
+                charts.forEach(chart => {
+                    chart.data.datasets.forEach(dataset => {
+                        dataset.data = getRandomData(10, 100); // Update with new random data
+                    });
+                    chart.update();
+                });
+            }, 2000);
+        });
+        </script>
+        
+
+</body>
+
+</html>

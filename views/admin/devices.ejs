@@ -1,0 +1,39 @@
+<%-include('../includes/adminbar.ejs')%>
+
+        <main>
+
+            <div class="page-header">
+                <h1>Devices</h1>
+            </div>
+
+            <div>
+              <!-- devices   -->
+              <main>
+                <% if (devices.length > 0) { %>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Device No</th>
+                                <th>Device Name</th>
+                                <th>Device Location</th>
+                                <th>Device Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let cnt = 1 %>
+                            <% for (let device of devices) { %>
+                                <tr>
+                                    <td><%= cnt %></td>
+                                    <td><%= device.deviceName %></td>
+                                    <td><%= device.location %></td>
+                                    <td>Online</td>
+                                </tr>
+                                <% cnt++ %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <h1>No Devices Found</h1>
+                <% } %>
+            </main>
+            
